@@ -1,0 +1,71 @@
+name: oauth-jumpbox
+
+instance_groups:
+- name: oauth-jumpbox
+  instances: 1
+  azs: [z1]
+  vm_type: default
+  stemcell: default
+  networks: [{name: default}]
+  update: {serial: true}
+  jobs:
+  - name: oauth
+    release: oauth-jumpbox
+    properties:
+      pam_oauth:
+	client-id: jumpbox
+	client-secret: foobar # FIXME should not be hardcoded
+	redirect-url: "urn:ietf:wg:oauth:2.0:oob"
+	scopes: ["openid"]
+	endpoint-auth-url: "((/concourse/main/concourse_url)):8443/oauth/authorize"
+	endpoint-token-url: "((/concourse/main/concourse_url))8443/oauth/token"
+	username-format: "%s"
+  - name: ca_certs
+    release: os-conf
+    properties:
+      certs: ((/concourse/main/bosh_ca_cert))
+  - name: docker
+    release: docker
+    properties:
+      tcp_address: 0.0.0.0
+      tls_cacert: "((docker-tls.ca))"
+      tls_cert: "((docker-tls.certificate))"
+      tls_key: "((docker-tls.private_key))"
+
+variables:
+- name: docker-ca
+  type: certificate
+  options:
+    is_ca: true
+    common_name: dockerCA
+- name: docker-tls
+  type: certificate
+  options:
+    ca: docker-ca
+    common_name: docker
+    extended_key_usage:
+    - client_auth
+
+stemcells:
+- alias: default
+  os: ubuntu-trusty
+  version: latest
+
+update:
+  canaries: 0
+  canary_watch_time: 1000-60000
+  update_watch_time: 1000-60000
+  max_in_flight: 32
+  serial: false
+
+releases:
+- name: os-conf
+  version: 19
+  url: https://bosh.io/d/github.com/cloudfoundry/os-conf-release?v=19
+  sha1: f515406949ee0bba0329d1ce4a7eb1679521eabd
+- name: docker
+  version: 31.0.1
+  url: https://github.com/cloudfoundry-community/docker-boshrelease/releases/download/v31.0.1/docker-31.0.1.tgz
+  sha1: 550ab08cb6dcd113ab5182d84fbcb09d966a612a
+- name: oauth-jumpbox
+  version: latest
