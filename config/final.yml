@@ -1,0 +1,5 @@
+name: oauth-jumpbox-boshreleas
+blobstore:
+  provider: local
+  options:
+    blobstore_path: final_blobs
