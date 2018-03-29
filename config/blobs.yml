@@ -1,3 +1,6 @@
+oauth/libnss-ato_0.2-1_amd64.deb:
+  size: 4492
+  sha: 37b92ede16c3604a665176749b3c76b51da432be
 oauth/pam-exec-oauth2:
   size: 10181989
   sha: 3db21ccfb63bce8034ba402f145dd8204b8db9e1

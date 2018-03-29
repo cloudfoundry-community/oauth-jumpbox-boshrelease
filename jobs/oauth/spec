@@ -3,11 +3,12 @@ name: oauth
 
 templates:
   pam-exec-oauth2.yaml: config/pam-exec-oauth2.yaml
-  pam-exec-oauth2.sh: bin/pam-exec-oauth2.sh
+  libnss-ato.conf: config/libnss-ato.conf
+  pam-exec-oauth2: bin/pam-exec-oauth2
   pre-start: bin/pre-start
 
 packages:
-- pam-exec-oauth2
+- pam-oauth
 
 properties:
   pam_oauth:

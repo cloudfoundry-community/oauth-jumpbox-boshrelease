@@ -18,7 +18,7 @@ instance_groups:
         redirect-url: "urn:ietf:wg:oauth:2.0:oob"
         scopes: ["openid"]
         endpoint-auth-url: "((/concourse/main/concourse_url)):8443/oauth/authorize"
-        endpoint-token-url: "((/concourse/main/concourse_url))8443/oauth/token"
+        endpoint-token-url: "((/concourse/main/concourse_url)):8443/oauth/token"
         username-format: "%s"
   - name: ca_certs
     release: os-conf

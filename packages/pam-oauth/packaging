@@ -1,0 +1,13 @@
+set -e
+
+mkdir -p ${BOSH_INSTALL_TARGET}/{bin,pkg}
+
+# pam-exec-oauth2
+cp oauth/pam-exec-oauth2 ${BOSH_INSTALL_TARGET}/bin/
+chmod +x ${BOSH_INSTALL_TARGET}/bin/*
+
+# libnss-ato
+cp oauth/libnss-ato*.deb ${BOSH_INSTALL_TARGET}/pkg/
+
+
+

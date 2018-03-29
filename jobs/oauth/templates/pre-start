@@ -2,17 +2,27 @@
 
 if ! grep -e 'pam-exec-oauth2' /etc/pam.d/common-auth -q; then
     # prepend pam oauth to commend auth config
-    sed -i "1s;^;auth sufficient pam_exec.so quiet expose_authtok /var/vcap/jobs/oauth/bin/pam-exec-oauth2.sh\n;" \
+    sed -i "1s;^;auth sufficient pam_exec.so quiet expose_authtok /var/vcap/jobs/oauth/bin/pam-exec-oauth2\n;" \
 	/etc/pam.d/common-auth
 fi
 
 # libnss-ato does not inherits groups
-if ! grep -e '^AllowGroups' /etc/ssh/sshd_config -q; then
+if ! grep -e '^# AllowGroups' /etc/ssh/sshd_config -q; then
     sed -i 's$AllowGroups$# AllowGroups$g' /etc/ssh/sshd_config
     service ssh restart
 fi
 
-# TODO install libnss-atojh
+# install libnss-atojh
+dpkg -i /var/vcap/packages/pam-oauth/pkg/libnss-*.deb
+
+# configure nss to use ato lib
+if ! grep -e 'ato$' /etc/nsswitch.conf -q; then
+    sed -i -E 's/passwd:\s+compat$/passwd:         compat ato/g' /etc/nsswitch.conf
+    sed -i -E 's/shadow:\s+compat$/shadow:         compat ato/g' /etc/nsswitch.conf    
+fi
+
+# Symlink libnss-ato config file to expected location
+ln -sf /var/vcap/jobs/oauth/config/libnss-ato.conf /etc/libnss-ato.conf
 
 
 
