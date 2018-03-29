@@ -1,4 +1,4 @@
-name: oauth-jumpbox-boshreleas
+name: oauth-jumpbox
 blobstore:
   provider: local
   options:
