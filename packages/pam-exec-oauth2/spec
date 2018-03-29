@@ -1,0 +1,7 @@
+---
+name: pam-exec-oauth2
+
+dependencies: []
+
+files:
+- oauth/*
