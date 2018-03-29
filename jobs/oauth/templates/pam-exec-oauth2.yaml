@@ -1,0 +1,1 @@
+<%= p('pam_oauth').to_yaml %>

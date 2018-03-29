@@ -1,0 +1,27 @@
+---
+name: oauth
+
+templates:
+  pam-exec-oauth2.yaml: config/pam-exec-oauth2.yaml
+  pam-exec-oauth2.sh: bin/pam-exec-oauth2.sh
+  pre-start: bin/pre-start
+
+packages:
+- pam-exec-oauth2
+
+properties:
+  pam_oauth:
+    description: PAM oAuth config 
+    example: |
+      {
+          client-id: "xxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+          client-secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          redirect-url: "urn:ietf:wg:oauth:2.0:oob",
+          scopes: ["email"],
+          endpoint-auth-url: "https://login.windows.net/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/oauth2/authorize",
+          endpoint-token-url: "https://login.windows.net/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/oauth2/token",
+          extra-parameters: {
+              resource: "https://graph.windows.net/"
+          },
+          username-format: "%s@example.org",
+      }    
