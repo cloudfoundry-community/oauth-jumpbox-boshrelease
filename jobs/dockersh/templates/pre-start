@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+# force login ssh into docker container
+if ! grep -e 'ForceCommand' /etc/ssh/sshd_config -q; then
+    echo "Match User *,!jumpbox" >> /etc/ssh/sshd_config
+    echo "  ForceCommand /var/vcap/jobs/dockersh/bin/dockersh" >> /etc/ssh/sshd_config
+    service ssh restart
+fi

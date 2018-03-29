@@ -9,6 +9,14 @@ instance_groups:
   networks: [{name: default}]
   update: {serial: true}
   jobs:
+  - name: user_add
+    release: os-conf
+    properties:
+      users:
+      - name: jumpbox
+        public_key: ((jumpbox_ssh.public_key))
+  - name: dockersh
+    release: oauth-jumpbox
   - name: oauth
     release: oauth-jumpbox
     properties:
@@ -33,6 +41,8 @@ instance_groups:
       tls_key: "((docker-tls.private_key))"
 
 variables:
+- name: jumpbox_ssh
+  type: ssh
 - name: docker-ca
   type: certificate
   options:
