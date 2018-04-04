@@ -3,7 +3,9 @@
 PATH=${PATH}:/var/vcap/packages/docker/bin/
 export DOCKER_HOST=unix:///var/vcap/sys/run/docker/docker.sock
 
-container_name="${USER}-dockersh"
+USERS=$(echo ${USER} | sed 's/@/-/g')
+
+container_name="${USERS}-dockersh"
 if ! docker ps -a | grep "${container_name}" -q; then
     docker create -it --name "${container_name}" busybox /bin/ash &> /dev/null
 fi
