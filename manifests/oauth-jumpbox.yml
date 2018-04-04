@@ -6,7 +6,9 @@ instance_groups:
   azs: [z1]
   vm_type: default
   stemcell: default
-  networks: [{name: default}]
+  networks:
+  - name: default
+    static_ips: 10.244.0.3
   update: {serial: true}
   jobs:
   - name: user_add
