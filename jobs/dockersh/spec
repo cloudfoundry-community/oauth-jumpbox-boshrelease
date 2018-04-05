@@ -7,4 +7,10 @@ templates:
 
 packages: []
 
-properties: {}
+properties:
+  container:
+    description: The docker container you want to use
+    default: busybox
+  command:
+    description: The command you want to execute when you run the container like /bin/bash
+    default: /bin/ash      

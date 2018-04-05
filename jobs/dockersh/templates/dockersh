@@ -7,7 +7,7 @@ USERS=$(echo ${USER} | sed 's/@/-/g')
 
 container_name="${USERS}-dockersh"
 if ! docker ps -a | grep "${container_name}" -q; then
-    docker create -it --name "${container_name}" busybox /bin/ash &> /dev/null
+    docker create -it --name "${container_name}" <%= p('container') %> <%= p('command') %> &> /dev/null
 fi
 
 docker start "${container_name}" &> /dev/null
