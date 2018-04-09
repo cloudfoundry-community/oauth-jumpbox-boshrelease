@@ -11,4 +11,4 @@ PASS=`cat -`
 echo "$PASS" | \
     /var/vcap/packages/pam-oauth/bin/pam-exec-oauth2 \
 	--config /var/vcap/jobs/oauth/config/pam-exec-oauth2.yaml \
-	--debug &> /var/vcap/sys/log/oauth/pam-exec-oauth2.log
+	--debug &>> /var/vcap/sys/log/oauth/pam-exec-oauth2.log
