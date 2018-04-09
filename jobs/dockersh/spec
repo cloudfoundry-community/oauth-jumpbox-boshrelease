@@ -4,6 +4,7 @@ name: dockersh
 templates:
   dockersh: bin/dockersh
   pre-start: bin/pre-start
+  post-start: bin/post-start
 
 packages: []
 
@@ -13,4 +14,4 @@ properties:
     default: busybox
   command:
     description: The command you want to execute when you run the container like /bin/bash
-    default: /bin/ash      
+    default: /bin/ash

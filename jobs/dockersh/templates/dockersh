@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# set -ex
 PATH=${PATH}:/var/vcap/packages/docker/bin/
 export DOCKER_HOST=unix:///var/vcap/sys/run/docker/docker.sock
 
@@ -11,4 +12,4 @@ if ! docker ps -a | grep "${container_name}" -q; then
 fi
 
 docker start "${container_name}" &> /dev/null
-docker attach "${container_name}"
+docker exec -i -t "${container_name}" <%= p('command') %>

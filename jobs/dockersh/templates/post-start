@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+# pull docker image
+PATH=${PATH}:/var/vcap/packages/docker/bin/
+export DOCKER_HOST=unix:///var/vcap/sys/run/docker/docker.sock
+
+docker pull <%= p('container') %>

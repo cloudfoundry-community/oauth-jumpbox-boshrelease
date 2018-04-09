@@ -9,6 +9,7 @@ fi
 # libnss-ato does not inherits groups
 if ! grep -e '^# AllowGroups' /etc/ssh/sshd_config -q; then
     sed -i 's$AllowGroups$# AllowGroups$g' /etc/ssh/sshd_config
+    sed -i -r 's$#\s+?PasswordAuthentication.*$PasswordAuthentication yes$g' /etc/ssh/sshd_config
     service ssh restart
 fi
 
@@ -18,12 +19,8 @@ dpkg -i /var/vcap/packages/pam-oauth/pkg/libnss-*.deb
 # configure nss to use ato lib
 if ! grep -e 'ato$' /etc/nsswitch.conf -q; then
     sed -i -E 's/passwd:\s+compat$/passwd:         compat ato/g' /etc/nsswitch.conf
-    sed -i -E 's/shadow:\s+compat$/shadow:         compat ato/g' /etc/nsswitch.conf    
+    sed -i -E 's/shadow:\s+compat$/shadow:         compat ato/g' /etc/nsswitch.conf
 fi
 
 # Symlink libnss-ato config file to expected location
 ln -sf /var/vcap/jobs/oauth/config/libnss-ato.conf /etc/libnss-ato.conf
-
-
-
-
