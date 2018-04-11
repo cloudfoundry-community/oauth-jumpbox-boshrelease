@@ -5,6 +5,7 @@ templates:
   dockersh: bin/dockersh
   pre-start: bin/pre-start
   post-start: bin/post-start
+  envs: config/envs
 
 packages: []
 
@@ -15,3 +16,5 @@ properties:
   command:
     description: The command you want to execute when you run the container like /bin/bash
     default: /bin/ash
+  docker_envs:
+    description: set an array of variables specifed as 'FOO=BAR'
