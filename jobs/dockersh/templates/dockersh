@@ -8,8 +8,11 @@ USERS=$(echo ${USER} | sed 's/@/-/g')
 
 container_name="${USERS}-dockersh"
 if ! docker ps -a | grep "${container_name}" -q; then
-    docker create -it -e "USER=${USER}" --env-file /var/vcap/jobs/dockersh/config/envs --name "${container_name}" <%= p('container') %> <%= p('command') %> &> /dev/null
+    docker create -it -e "USER=${USER}" \
+           --env-file /var/vcap/jobs/dockersh/config/env \
+           --name "${container_name}" <%= p('image') %> <%= p('command') %> \
+        &> /dev/null
 fi
 
 docker start "${container_name}" &> /dev/null
-docker exec -i --user "<$= p('user')%>" -t "${container_name}" <%= p('command') %>
+docker exec -i --user "<%= p('user')%>" -t "${container_name}" <%= p('command') %>

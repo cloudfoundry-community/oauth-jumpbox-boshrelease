@@ -5,13 +5,13 @@ templates:
   dockersh: bin/dockersh
   pre-start: bin/pre-start
   post-start: bin/post-start
-  envs: config/envs
+  env: config/env
 
 packages: []
 
 properties:
-  container:
-    description: The docker container you want to use
+  image:
+    description: The docker image you want to use for the user containers
     default: busybox
   command:
     description: The command you want to execute when you run the container like /bin/bash
@@ -19,5 +19,7 @@ properties:
   user:
     description: User to use inside the container
     default: root
-  docker_envs:
-    description: set an array of variables specifed as 'FOO=BAR'
+  env:
+    description: Environment variable available to all containers
+    example: |
+      FOO: BAR
