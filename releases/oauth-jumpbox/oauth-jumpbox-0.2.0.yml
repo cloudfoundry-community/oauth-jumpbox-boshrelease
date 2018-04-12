@@ -1,0 +1,19 @@
+name: oauth-jumpbox
+version: 0.2.0
+commit_hash: 5e439aa
+uncommitted_changes: false
+jobs:
+- name: dockersh
+  version: 32800599c88cacdddbcaf8a3492f16bec7d1ad37
+  fingerprint: 32800599c88cacdddbcaf8a3492f16bec7d1ad37
+  sha1: 285425851e21862909e2e99b076ae14545d9c619
+- name: oauth
+  version: 0845acac7391c8277f0ca20cc0ad5e119966e1da
+  fingerprint: 0845acac7391c8277f0ca20cc0ad5e119966e1da
+  sha1: 2cf86fd39d2a93179d6757a49749127dbe0e3d30
+packages:
+- name: pam-oauth
+  version: 52fd9019fb944f13ca8da540f4e4e8476f5b2d77
+  fingerprint: 52fd9019fb944f13ca8da540f4e4e8476f5b2d77
+  sha1: da7774132ccb90547f176d2ddebcf4d78dc75e7c
+  dependencies: []
