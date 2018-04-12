@@ -16,5 +16,11 @@ properties:
   command:
     description: The command you want to execute when you run the container like /bin/bash
     default: /bin/ash
+  user:
+    description: User to use inside the container
+    default: root
+  workdir:
+    description: Initial workdir inside the container
+    default: /
   docker_envs:
     description: set an array of variables specifed as 'FOO=BAR'

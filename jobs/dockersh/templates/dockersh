@@ -12,4 +12,4 @@ if ! docker ps -a | grep "${container_name}" -q; then
 fi
 
 docker start "${container_name}" &> /dev/null
-docker exec -i -t "${container_name}" <%= p('command') %>
+docker exec -i --user "<$= p('user')%>" --workdir "<%= p('workdir') %>" -t "${container_name}" <%= p('command') %>
