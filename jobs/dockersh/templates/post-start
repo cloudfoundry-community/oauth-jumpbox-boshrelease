@@ -6,4 +6,9 @@ set -e
 PATH=${PATH}:/var/vcap/packages/docker/bin/
 export DOCKER_HOST=unix:///var/vcap/sys/run/docker/docker.sock
 
-docker pull <%= p('container') %>
+image="<%= p('image') %>"
+
+found_image=$(docker search ${image} | cut -d' ' -f1 | grep -e "${image}$" | wc -l)
+if [ "${found_image}" == "1" ]; then
+    docker pull ${image}
+fi
