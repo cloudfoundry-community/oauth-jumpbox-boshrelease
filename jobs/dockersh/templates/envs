@@ -1,0 +1,1 @@
+<%= Array(if_p('docker_envs')).join("\n") { |var| "#{var}" } %>
