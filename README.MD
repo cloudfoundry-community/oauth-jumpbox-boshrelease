@@ -1,6 +1,6 @@
 # oauth jumpbox release
 this will deploy a jumpbox connected to an oauth server (e.g UAA)
-each user that logs-in will be assigned to there own global specified docker container
+each user that logs-in will be assigned to their own global specified docker container
 
 ## Deploy
 configure the manifest see options below.
@@ -8,7 +8,7 @@ configure the manifest see options below.
 `bosh deploy manifests/oauth-jumpbox.yml -d oauth-jumpbox`
 
 ## How to use
-please not that if there are any special characters use double quotes around the username.
+please note that if there are any special characters use double quotes around the username.
 
 `ssh "username@mail.com"@JUMPBOXIP`
 
@@ -55,9 +55,9 @@ example:
 ```
 
 ## From Source
-Depdencies:
+Dependencies:
 - git-lfs: https://git-lfs.github.com/
-this repository use `GIT LFS` to store blobs
+this repository uses `GIT LFS` to store blobs
 
 ```
 git clone https://github.com/cloudfoundry-community/oauth-jumpbox-boshrelease.git
