@@ -82,4 +82,6 @@ releases:
   url: https://github.com/cloudfoundry-community/docker-boshrelease/releases/download/v31.0.1/docker-31.0.1.tgz
   sha1: 550ab08cb6dcd113ab5182d84fbcb09d966a612a
 - name: oauth-jumpbox
-  version: latest
+  version: 0.2.1
+  url: https://github.com/cloudfoundry-community/oauth-jumpbox-boshrelease/releases/download/0.2.1/oauth-jumpbox-0.2.1.tgz
+  sha1: 2e5c044bf6c06fb7da1c8b04bb18cdc8bf7d4534
