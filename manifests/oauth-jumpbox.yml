@@ -24,7 +24,7 @@ instance_groups:
     properties:
       pam_oauth:
         client-id: jumpbox
-        client-secret: foobar # FIXME should not be hardcoded
+        client-secret: ((client_secret))
         redirect-url: "urn:ietf:wg:oauth:2.0:oob"
         scopes: ["openid"]
         endpoint-auth-url: "((/concourse/main/concourse_url)):8443/oauth/authorize"
@@ -57,7 +57,9 @@ variables:
     common_name: docker
     extended_key_usage:
     - client_auth
-
+- name: client_secret
+  type: password
+  
 stemcells:
 - alias: default
   os: ubuntu-trusty
