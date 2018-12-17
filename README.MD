@@ -31,12 +31,13 @@ UAA deployed with [BUCC](https://github.com/starkandwayne/bucc)
 
 for this example to work you would also need create a client in the UAA
 ```
-uaac client add jumpbox \
-     --name jumpbox \
-     --scope openid \
-     --autoapprove true \
-     --authorized_grant_types password,refresh_token \
-     --secret "foobar"
+secret_path=$(credhub find -n oauth-jumpbox/client_secret -j | jq -r '.credentials[0].name')
+secret=$(credhub get -j -n ${secret_path} | jq -r '.value')
+
+uaa create-client jumpbox \
+    --client_secret ${secret} \
+    --authorized_grant_types password,refresh_token \
+    --scope openid
 ```
 ## Configure docker container settings
 
