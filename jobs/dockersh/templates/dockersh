@@ -10,7 +10,7 @@ container_name="${USERS}-dockersh"
 if ! docker ps -a | grep "${container_name}" -q; then
     docker create -it -e "USER=${USER}" \
            <% p('env', {}).each do |k,v| %> \
-           <%= "--env \"#{k}=#{v.dump.gsub('"', '')}\" \\" %>
+           <%= "--env #{k}=$#{v.dump.gsub('"', "'")} \\" %>
            <% end %> \
             --name "${container_name}" <%= p('image') %> <%= p('command') %> \
             &> /dev/null
