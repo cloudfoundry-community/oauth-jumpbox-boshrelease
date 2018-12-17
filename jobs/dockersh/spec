@@ -5,7 +5,6 @@ templates:
   dockersh: bin/dockersh
   pre-start: bin/pre-start
   post-start: bin/post-start
-  env: config/env
 
 packages: []
 

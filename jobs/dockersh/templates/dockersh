@@ -9,9 +9,11 @@ USERS=$(echo ${USER} | sed 's/[+!@#$%^&*()]/-/g')
 container_name="${USERS}-dockersh"
 if ! docker ps -a | grep "${container_name}" -q; then
     docker create -it -e "USER=${USER}" \
-           --env-file /var/vcap/jobs/dockersh/config/env \
-           --name "${container_name}" <%= p('image') %> <%= p('command') %> \
-        &> /dev/null
+           <% p('env', {}).each do |k,v| %> \
+           <%= "--env \"#{k}=#{v.dump.gsub('"', '')}\" \\" %>
+           <% end %> \
+            --name "${container_name}" <%= p('image') %> <%= p('command') %> \
+            &> /dev/null
 fi
 
 docker start "${container_name}" &> /dev/null
