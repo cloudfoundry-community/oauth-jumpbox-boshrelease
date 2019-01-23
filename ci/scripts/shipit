@@ -46,12 +46,12 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 ###############################################################
 GIT_LFS_SKIP_SMUDGE=1 git clone ${REPO_ROOT} ${REPO_OUT}
+sed 's#git@github.com:#https://github.com/#g' ${REPO_ROOT}/.git/config > ${REPO_OUT}/.git/
 
 pushd ${REPO_OUT}
 RELEASE_NAME=$(bosh int config/final.yml --path /name)
 
 header "Pulling git lfs blobs"
-git remote set-url origin https://github.com/starkandwayne/director-bosh-dns-release.git
 git lfs fetch
 
 header "Create final release..."
