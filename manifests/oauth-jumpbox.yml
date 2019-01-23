@@ -8,7 +8,6 @@ instance_groups:
   stemcell: default
   networks:
   - name: default
-    static_ips: 10.244.0.3
   update: {serial: true}
   jobs:
   - name: user_add
@@ -19,6 +18,10 @@ instance_groups:
         public_key: ((jumpbox_ssh.public_key))
   - name: dockersh
     release: oauth-jumpbox
+    properties:
+      env:
+        BOSH_ENVIRONMENT: ((/concourse/main/bosh_environment))
+        BOSH_CA_CERT: ((/concourse/main/bosh_ca_cert))
   - name: oauth
     release: oauth-jumpbox
     properties:
@@ -59,7 +62,7 @@ variables:
     - client_auth
 - name: client_secret
   type: password
-  
+
 stemcells:
 - alias: default
   os: ubuntu-trusty
@@ -82,6 +85,6 @@ releases:
   url: https://github.com/cloudfoundry-incubator/docker-boshrelease/releases/download/v33.0.0/docker-33.0.0.tgz
   sha1: 8836ed245406abea5eaa0b3aacb568ea421eb7b3
 - name: oauth-jumpbox
-  version: 0.2.1
+  version: latest
   url: https://github.com/cloudfoundry-community/oauth-jumpbox-boshrelease/releases/download/0.2.1/oauth-jumpbox-0.2.1.tgz
   sha1: 2e5c044bf6c06fb7da1c8b04bb18cdc8bf7d4534

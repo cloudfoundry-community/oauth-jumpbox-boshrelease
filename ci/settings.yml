@@ -1,0 +1,26 @@
+---
+meta:
+  name: oauth-jumpbox-boshrelease
+  target: ohio-cf
+  url: https://ci2.starkandwayne.com
+
+  test-errand: ~
+
+  initial_version: 0.1.0
+
+  git:
+    email:  ((git-commit-email))
+    name:   ((git-commit-name))
+
+  bosh-lite:
+    target:   ((bosh-lite-environment))
+    cacert:   ((bosh-lite-ca-cert))
+    username: ((bosh-lite-client))
+    password: ((bosh-lite-client-secret))
+
+  github:
+    owner:  cloudfoundry-community
+    repo:   (( grab meta.pipeline ))
+    branch: master
+    private_key:  ((github-private-key))
+    access_token: ((github-access-token))
