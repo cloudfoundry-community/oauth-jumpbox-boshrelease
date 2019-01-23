@@ -46,7 +46,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 ###############################################################
 GIT_LFS_SKIP_SMUDGE=1 git clone ${REPO_ROOT} ${REPO_OUT}
-sed 's#git@github.com:#https://github.com/#g' ${REPO_ROOT}/.git/config > ${REPO_OUT}/.git/
+sed 's#git@github.com:#https://github.com/#g' ${REPO_ROOT}/.git/config > ${REPO_OUT}/.git/config
 
 pushd ${REPO_OUT}
 RELEASE_NAME=$(bosh int config/final.yml --path /name)
