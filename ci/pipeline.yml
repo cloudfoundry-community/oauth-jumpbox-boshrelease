@@ -19,7 +19,10 @@ meta:
   pipeline: (( grab meta.name ))
   manifest:
     path:   "manifests/oauth-jumpbox.yml"
-    vars:   "--- {}"
+    vars: |
+      /concourse/main/bosh_environment: example.com
+      /concourse/main/bosh_ca_cert: test
+      /concourse/main/concourse_url: example.com
     vars-pr: (( grab meta.manifest.vars ))
     operator_file_paths: "" # comma separated list relative to repo root
 
