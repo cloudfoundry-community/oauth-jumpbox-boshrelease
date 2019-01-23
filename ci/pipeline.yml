@@ -18,7 +18,7 @@ meta:
   url:      (( param "Please specify the full url of the target Concourse CI" ))
   pipeline: (( grab meta.name ))
   manifest:
-    path:   "manifests/director-bosh-dns.yml"
+    path:   "manifests/oauth-jumpbox.yml"
     vars:   "--- {}"
     vars-pr: (( grab meta.manifest.vars ))
     operator_file_paths: "" # comma separated list relative to repo root
@@ -70,6 +70,18 @@ jobs:
       - name: get
         aggregate:
         - { get: git, trigger: true }
+      - task: unit-test
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: starkandwayne/concourse-ruby
+              tag:        2.5
+          inputs:
+            - name: git
+          run:
+            path: git/ci/scripts/unit-test
       - name: testflights
         aggregate:
         - name: testflight

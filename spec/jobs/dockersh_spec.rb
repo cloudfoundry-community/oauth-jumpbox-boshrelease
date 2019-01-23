@@ -7,17 +7,16 @@ describe 'dockersh job' do
   let(:job) { release.job('dockersh') }
 
   describe 'env' do
-    let(:template) { job.template('config/env') }
+    let(:template) { job.template('bin/dockersh') }
 
     it 'renders environment variables' do
-      env = template.render("env" => { "FOO" => "BAR", "BAR" => "FOO" }).split("\n")
-      expect(env[0]).to eq('FOO=BAR')
-      expect(env[1]).to eq('BAR=FOO')
+      file = template.render("env" => { "FOO" => "BAR", "BAR" => "FOO" })
+      expect(file).to include("BAR=$'FOO'")
     end
 
-    it 'renders empty file when no environment variables given' do
-      env = template.render({})
-      expect(env).to eq("\n")
+    it 'escapes newlines in environment variables' do
+      file = template.render("env" => { "FOO_CA" => "-- BEGIN CERT --\nBAR\n-- END CERT --" })
+      expect(file).to include("FOO_CA=$'-- BEGIN CERT --\\nBAR\\n-- END CERT --'")
     end
   end
 end

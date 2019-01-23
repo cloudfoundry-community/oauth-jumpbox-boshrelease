@@ -1,14 +1,6 @@
 #!/bin/bash -e
 
-export GOPATH=${PWD}/gopath
-export GOCACHE=${PWD}/go-build
+pushd git
 
-export PATH=${PATH}:${GOPATH}/bin
-go get github.com/onsi/ginkgo/ginkgo
-
-export GO111MODULE=on
-export GOFLAGS=-mod=vendor
-pushd git/src/director-bosh-dns
-ginkgo ./... 
-
-
+bundle
+rspec spec
