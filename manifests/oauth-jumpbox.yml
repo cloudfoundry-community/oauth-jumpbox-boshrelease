@@ -77,14 +77,14 @@ update:
 
 releases:
 - name: os-conf
-  version: 19
-  url: https://bosh.io/d/github.com/cloudfoundry/os-conf-release?v=19
   sha1: f515406949ee0bba0329d1ce4a7eb1679521eabd
+  url: https://bosh.io/d/github.com/cloudfoundry/os-conf-release?v=19
+  version: 19
 - name: docker
-  version: 33.0.0
-  url: https://github.com/cloudfoundry-incubator/docker-boshrelease/releases/download/v33.0.0/docker-33.0.0.tgz
   sha1: 8836ed245406abea5eaa0b3aacb568ea421eb7b3
+  url: https://github.com/cloudfoundry-incubator/docker-boshrelease/releases/download/v33.0.0/docker-33.0.0.tgz
+  version: 33.0.0
 - name: oauth-jumpbox
-  version: latest
-  url: https://github.com/cloudfoundry-community/oauth-jumpbox-boshrelease/releases/download/0.2.1/oauth-jumpbox-0.2.1.tgz
-  sha1: 2e5c044bf6c06fb7da1c8b04bb18cdc8bf7d4534
+  sha1: 1e98e3394e06a3832388147552e617cd6fdfe554
+  url: https://github.com/cloudfoundry-community/oauth-jumpbox-boshrelease/releases/download/v0.3.0/oauth-jumpbox-0.3.0.tgz
+  version: 0.3.0
