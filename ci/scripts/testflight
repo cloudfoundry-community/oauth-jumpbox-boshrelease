@@ -34,6 +34,9 @@ trap "echo; echo; echo; sleep 10; delete_deployment" EXIT SIGINT SIGTERM
 
 cd ${REPO_ROOT:?required}
 
+# Reset blob in dir by triggering git lfs
+git reset --hard
+
 header "Confirming testflight inputs"
 
 echo "Confirming deployment manifest ${MANIFEST_PATH} exists"
