@@ -52,7 +52,7 @@ pushd ${REPO_OUT}
 RELEASE_NAME=$(bosh int config/final.yml --path /name)
 
 header "Pulling git lfs blobs"
-git lfs fetch
+git lfs pull
 
 header "Create final release..."
 bosh -n create-release --final --version "${VERSION}"
