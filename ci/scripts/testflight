@@ -35,6 +35,7 @@ trap "echo; echo; echo; sleep 10; delete_deployment" EXIT SIGINT SIGTERM
 cd ${REPO_ROOT:?required}
 header "Pulling in any git submodules..."
 git submodule update --init --recursive --force
+git lfs fetch
 
 header "Confirming testflight inputs"
 
