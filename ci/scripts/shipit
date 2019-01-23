@@ -45,11 +45,6 @@ fi
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 ###############################################################
-
-curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
-apt-get install git-lfs
-git lfs install
-
 GIT_LFS_SKIP_SMUDGE=1 git clone ${REPO_ROOT} ${REPO_OUT}
 
 pushd ${REPO_OUT}
@@ -57,7 +52,7 @@ RELEASE_NAME=$(bosh int config/final.yml --path /name)
 
 header "Pulling git lfs blobs"
 git remote set-url origin https://github.com/starkandwayne/director-bosh-dns-release.git
-git lfs pull
+git lfs fetch
 
 header "Create final release..."
 bosh -n create-release --final --version "${VERSION}"
@@ -67,7 +62,7 @@ popd
 
 RELEASE_TGZ=$REPO_OUT/releases/$RELEASE_NAME/$RELEASE_NAME-$VERSION.tgz
 export RELEASE_SHA1=$(sha1sum $RELEASE_TGZ | head -n1 | awk '{print $1}')
-export RELEASE_URL="https://github.com/${GITHUB_OWNER}/${RELEASE_NAME}-release/releases/download/v${VERSION}/${RELEASE_NAME}-${VERSION}.tgz"
+export RELEASE_URL="https://github.com/${GITHUB_OWNER}/${RELEASE_NAME}-boshrelease/releases/download/v${VERSION}/${RELEASE_NAME}-${VERSION}.tgz"
 echo "RELEASE_SHA1=$RELEASE_SHA1"
 
 mkdir -p ${RELEASE_ROOT}/artifacts
