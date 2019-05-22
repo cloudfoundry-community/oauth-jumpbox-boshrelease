@@ -34,8 +34,8 @@ for this example to work you would also need create a client in the UAA
 secret_path=$(credhub find -n oauth-jumpbox/client_secret -j | jq -r '.credentials[0].name')
 secret=$(credhub get -j -n ${secret_path} | jq -r '.value')
 
-uaa create-client jumpbox \
-    --client_secret ${secret} \
+uaac client add jumpbox \
+    --secret ${secret} \
     --authorized_grant_types password,refresh_token \
     --scope openid
 ```
